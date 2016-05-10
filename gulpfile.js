@@ -11,7 +11,7 @@ gulp.task('lint', () => {
 });
 
 gulp.task('webpack', () => {
-  gulp.src('/app/js/*')
+  gulp.src('app/js/*.js')
   .pipe(webpack({
     output: {
       filename: 'bundle.js'
@@ -25,5 +25,11 @@ gulp.task('staticHTML', () => {
   .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['lint', 'webpack', 'staticHTML']);
+gulp.task('css', () => {
+  gulp.src('app/**/*.css')
+  .pipe(gulp.dest('./build'));
+});
+
+gulp.task('test', ['lint']);
+gulp.task('build', ['lint', 'webpack', 'staticHTML', 'css']);
 gulp.task('default', ['lint']);

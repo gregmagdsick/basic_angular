@@ -1,4 +1,4 @@
-# basic_angular
+# Basic Angular
 A basic Angular app for Code Fellows 401d7 made by Greg Magdsick
 
 
@@ -13,3 +13,7 @@ A basic Angular app for Code Fellows 401d7 made by Greg Magdsick
 ## To test
 Currently the only test is the linter
 + Type 'gulp test' to run the gulp tests
+
+## References
+Used the lab videos [here](https://www.youtube.com/watch?v=Gu_fyBYK7GA&index=49&list=PLZshpIn7Zx04B8LnaWfX3J0mlVa2m4VcR)
+And help from Robert Koritnik [here](http://stackoverflow.com/questions/21708689/clear-text-input-on-click-with-angularjs)

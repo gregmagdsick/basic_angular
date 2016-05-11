@@ -31,11 +31,12 @@ gulp.task('css', () => {
   .pipe(gulp.dest('./build'));
 });
 
-gulp.task('server', (cb) => {
+gulp.task('server', (done) => {
   exec('node server.js', (err, stdout, stderr) => {
+    if (err) throw err;
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');
-    cb(err);
+    done();
   });
 });
 

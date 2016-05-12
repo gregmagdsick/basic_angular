@@ -2,8 +2,9 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
 const exec = require('child_process').exec;
-const scripts = ['*.js', 'app/*.js', 'test/*.js'];
 const protractor = require('gulp-protractor').protractor;
+
+const scripts = ['*.js', 'app/**/*.js', 'test/**/*.js'];
 
 gulp.task('lint', () => {
   return gulp.src(scripts)

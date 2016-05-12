@@ -33,7 +33,7 @@ gulp.task('css', () => {
 });
 
 gulp.task('server', (done) => {
-  exec('node server.js', (err, stdout, stderr) => {
+  return exec('node server.js', (err, stdout, stderr) => {
     if (err) throw err;
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');
@@ -42,7 +42,7 @@ gulp.task('server', (done) => {
 });
 
 gulp.task('selenium', (done) => {
-  exec('webdriver-manager start', (err, stdout, stderr) => {
+  return exec('webdriver-manager start', (err, stdout, stderr) => {
     if (err) throw err;
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');

@@ -2,8 +2,9 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
 const exec = require('child_process').exec;
-const scripts = ['*.js', 'app/*.js', 'test/*.js'];
 const protractor = require('gulp-protractor').protractor;
+
+const scripts = ['*.js', 'app/**/*.js', 'test/**/*.js'];
 
 gulp.task('lint', () => {
   return gulp.src(scripts)
@@ -32,7 +33,7 @@ gulp.task('css', () => {
 });
 
 gulp.task('server', (done) => {
-  exec('node server.js', (err, stdout, stderr) => {
+  return exec('node server.js', (err, stdout, stderr) => {
     if (err) throw err;
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');
@@ -41,7 +42,7 @@ gulp.task('server', (done) => {
 });
 
 gulp.task('selenium', (done) => {
-  exec('webdriver-manager start', (err, stdout, stderr) => {
+  return exec('webdriver-manager start', (err, stdout, stderr) => {
     if (err) throw err;
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');

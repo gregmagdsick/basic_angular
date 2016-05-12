@@ -12,7 +12,7 @@ gulp.task('lint', () => {
 });
 
 gulp.task('webpack', () => {
-  gulp.src('app/js/*.js')
+  return gulp.src('app/js/*.js')
   .pipe(webpack({
     output: {
       filename: 'bundle.js'
@@ -22,18 +22,25 @@ gulp.task('webpack', () => {
 });
 
 gulp.task('staticHTML', () => {
-  gulp.src('app/**/*.html')
+  return gulp.src('app/**/*.html')
   .pipe(gulp.dest('./build'));
 });
 
 gulp.task('css', () => {
-  gulp.src('app/**/*.css')
+  return gulp.src('app/**/*.css')
   .pipe(gulp.dest('./build'));
 });
 
 gulp.task('server', (done) => {
-  exec('node server.js', (err, stdout, stderr) => {
-    if (err) throw err;
+  exec('node server.js', (err, stdout, stderr) => { //  eslint-disable-line handle-callback-err
+    process.stdout.write(stdout + '\n');
+    process.stderr.write(stderr + '\n');
+    done();
+  });
+});
+
+gulp.task('selenium', (done) => {
+  exec('webdriver-manager start', (err, stdout, stderr) => { //  eslint-disable-line handle-callback-err
     process.stdout.write(stdout + '\n');
     process.stderr.write(stderr + '\n');
     done();
@@ -41,14 +48,13 @@ gulp.task('server', (done) => {
 });
 
 gulp.task('protractor', () => {
-  gulp.src('test/integration/*spec.js')
+  return gulp.src('test/integration/*spec.js')
   .pipe(protractor({
     configFile: 'test/integration/config.js',
-    args: ['--baseurl', 'http://127.0.0.1:5050']
-  }))
-  .on('error', (e) => {throw e; });
+    args: ['--baseurl', 'http://127.0.0.1:8000']
+  }));
 });
 
-gulp.task('test', ['build', 'server', 'protractor']);
+gulp.task('test', ['build', 'server', 'selenium', 'protractor']);
 gulp.task('build', ['lint', 'webpack', 'staticHTML', 'css']);
 gulp.task('default', ['lint']);
